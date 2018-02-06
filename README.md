@@ -1,21 +1,19 @@
 # iOS OTP Generators
-[![Build Status](https://travis-ci.org/codewise/ios-otp-generators.svg?branch=master)](https://travis-ci.org/codewise/ios-otp-generators)
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/OTPGenerator/badge.png)](http://cocoapods.org/?q=otpgenerator)
 
-Project contains generators for [one time password](https://en.wikipedia.org/wiki/One-time_password) based on the time and on a counter. Code is written in [Swift2](https://developer.apple.com/swift/) and depends on the CommonCrypto module. At this moment, CommonCrypto is not a modular framework and all of it's headers have been compiled into this library. Unfortunatelly it's the only way to make it work for the time being.
+Project contains generators for [one time password](https://en.wikipedia.org/wiki/One-time_password) based on the time and on a counter. Code is written in [Swift4](https://developer.apple.com/swift/) and depends on the CommonCrypto module. At this moment, CommonCrypto is not a modular framework and all of it's headers have been compiled into this library. Unfortunatelly it's the only way to make it work for the time being.
 
 ### Installation
 
 #### Requirements
 
-`OTPGenerator` is written in Swift 3 so it requires Xcode 8.
+`OTPGenerator` is written in Swift 4 so it requires Xcode 9.
 
-#### CocoaPods
+#### Carthage
 
 ```
-use_frameworks!
-pod 'OTPGenerator', '~> 1.0'
+github "divadretlaw/ios-otp-generators" "master"
 ```
+
 Then in files where you need to use it just add:
 ```
 import OTPGenerator
