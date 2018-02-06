@@ -20,8 +20,7 @@ import XCTest
 
 class HOTPGeneratorTests: XCTestCase {
 
-    let generator1 = HOTPGenerator(secret: "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ", counter: 0, pinLength: 6, algorithm: .sha1)
-    let generator2 = HOTPGenerator(secret: "12345678901234567890", counter: 0, pinLength: 6, algorithm: .sha1, secretIsBase32: false)
+    let generator = HOTPGenerator(secret: "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ", counter: 0, pinLength: 6, algorithm: .sha1)
 
     let results = [
         "287082", "359152", "969429", "338314", "254676",
@@ -29,39 +28,25 @@ class HOTPGeneratorTests: XCTestCase {
     ]
 
     func testInit() {
-        XCTAssertNotNil(generator1)
-        XCTAssertNotNil(generator2)
+        XCTAssertNotNil(generator)
     }
 
-    func testFailInit1() {
+    func testFailInit() {
         let gen = HOTPGenerator(secret: "12345678901234567890", counter: 0, pinLength: 0)
         XCTAssertNil(gen)
     }
 
-    func testFailInit2() {
-        let gen = HOTPGenerator(secret: "12345678901234567890", counter: 30, pinLength: 6)
-        XCTAssertNil(gen)
-    }
-
     func testTokenConsistency() {
-        XCTAssertEqual("755224", self.generator1!.generateOTPForCounter(0))
+        XCTAssertEqual("755224", self.generator!.generateOTP(counter: 0))
         // make sure generating another token with same counter doesn't change the generator
-        XCTAssertEqual("755224", self.generator1!.generateOTPForCounter(0))
+        XCTAssertEqual("755224", self.generator!.generateOTP(counter: 0))
     }
 
     // http://www.ietf.org/rfc/rfc4226.txt
     // Appendix D - HOTP Algorithm: Test Values
-    func testConsecutiveTokens1() {
+    func testConsecutiveTokens() {
         for result in results {
-            XCTAssertEqual(result, self.generator1!.generateOTP())
+            XCTAssertEqual(result, self.generator!.generateOTP())
         }
     }
-
-    func testConsecutiveTokens2() {
-        for result in results {
-            XCTAssertEqual(result, self.generator2!.generateOTP())
-        }
-
-    }
-
 }

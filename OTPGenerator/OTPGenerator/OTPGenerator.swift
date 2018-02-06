@@ -44,7 +44,7 @@ public enum OTPAlgorithm: Int {
 }
 
 protocol OTPGeneratorProtocol {
-    func generateOTPForCounter(_ counter: UInt64) -> String?
+    func generateOTP(counter: UInt64) -> String?
     func generateOTP() -> String?
 }
 
@@ -54,7 +54,7 @@ extension OTPGeneratorProtocol {
      
     - returns: nil
     */
-    func generateOTP() -> String? {
+    public func generateOTP() -> String? {
         return nil
     }
 }
@@ -63,7 +63,7 @@ extension OTPGeneratorProtocol {
 Base class for generator, this is a place where magic happens
 */
 open class OTPGenerator: OTPGeneratorProtocol {
-
+    
     fileprivate var secretKey: Data
     fileprivate var pinModeTable = [0, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000]
     fileprivate var pinLength: Int
@@ -77,23 +77,14 @@ open class OTPGenerator: OTPGeneratorProtocol {
     - parameter pinLength: Length of generated tokens, must be between 1 and 8 digits
     - parameter algorithm: Algorigthm used for token generation, defaults to SHA1
     */
-    internal init?(secret: String, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1, secretIsBase32: Bool = true) {
-        self.secretKey = secret.data(using: String.Encoding.utf8)!
-        self.pinLength = pinLength
-        self.algorithm = algorithm
-
-        if secretIsBase32 {
-            if let secretKey = secret.base32DecodedData {
-                self.secretKey = secretKey as Data
-            }
-            else {
-                return nil
-            }
-        }
-
-        if pinLength < 1 || pinLength > 8 {
+    internal init?(secret: String, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1) {
+        guard let secretKey = secret.base32DecodedData, pinLength > 0 || pinLength <= 8 else {
             return nil
         }
+        
+        self.secretKey = secretKey as Data
+        self.pinLength = pinLength
+        self.algorithm = algorithm
     }
 
     /**
@@ -103,7 +94,7 @@ open class OTPGenerator: OTPGeneratorProtocol {
     - parameter counter: Value for which token is generated
     - returns: Generated token or nil
     */
-    func generateOTPForCounter(_ counter: UInt64) -> String? {
+    func generateOTP(counter: UInt64) -> String? {
         var newCounter = counter.bigEndian
         let counterData = Data(bytes: &newCounter, count: MemoryLayout.size(ofValue: newCounter))
         let algorithm: CCHmacAlgorithm = self.algorithm.algorithm

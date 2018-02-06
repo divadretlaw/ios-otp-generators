@@ -59,25 +59,10 @@ class TOTPGeneratorTests: XCTestCase {
             for algorithm in algorithms {
                 let generator = TOTPGenerator(secret: "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ", period: 30, pinLength: 6, algorithm: algorithm)
                 let date = Date(timeIntervalSince1970: interval)
-                XCTAssertEqual(results[i], generator!.generateOTPForDate(date), "Invalid results \(interval) - \(algorithm)")
+                XCTAssertEqual(results[i], generator!.generateOTP(date: date), "Invalid results \(interval) - \(algorithm)")
                 i += 1
             }
         }
     }
-
-    func testTokenResultsEncodeSecretFirst() {
-        var i = 0
-        for interval in intervals {
-            for algorithm in algorithms {
-                let generator = TOTPGenerator(secret: "12345678901234567890", period: 30, pinLength: 6, algorithm: algorithm, secretIsBase32: false)
-                let date = Date(timeIntervalSince1970: interval)
-                XCTAssertEqual(results[i], generator!.generateOTPForDate(date), "Invalid results \(interval) - \(algorithm)")
-                i += 1
-            }
-        }
-
-    }
-
-
 
 }

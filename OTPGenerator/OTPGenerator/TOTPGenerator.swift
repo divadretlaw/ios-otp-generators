@@ -35,20 +35,20 @@ open class TOTPGenerator: OTPGenerator {
     - parameter pinLength: Length of generated tokens, must be between 1 and 8 digits, defaults to 6
     - parameter algorithm: Algorithm used for token generation, defaults to SHA1
     */
-    public init?(secret: String, period: TimeInterval, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1, secretIsBase32: Bool = true) {
-        self.period = period
-        super.init(secret: secret, pinLength: pinLength, algorithm: algorithm, secretIsBase32: secretIsBase32)
-
-        if period <= 0 || period > 300 {
+    public init?(secret: String, period: TimeInterval, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1) {
+        guard period > 0 || period <= 300 else {
             return nil
         }
+        
+        self.period = period
+        super.init(secret: secret, pinLength: pinLength, algorithm: algorithm)
     }
 
     /**
     Generates next available token
     */
     open func generateOTP() -> String? {
-        return self.generateOTPForDate()
+        return self.generateOTP(date: Date())
     }
 
     /**
@@ -57,10 +57,10 @@ open class TOTPGenerator: OTPGenerator {
     - parameter date: Date for which token is generated
     - returns: Generated token or nil
     */
-    open func generateOTPForDate(_ date: Date = Date()) -> String? {
+    open func generateOTP(date: Date) -> String? {
         let seconds = date.timeIntervalSince1970
         let counter = uint_fast64_t(seconds / self.period)
-        return self.generateOTPForCounter(counter)
+        return self.generateOTP(counter: counter)
     }
 
 }

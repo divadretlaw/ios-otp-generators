@@ -33,9 +33,9 @@ open class HOTPGenerator: OTPGenerator {
      - parameter pinLength: Length of generated tokens, must be between 1 and 8 digits, defaults to 6
      - parameter algorithm: Algorithm used for token generation, defaults to SHA1
      */
-    public init?(secret: String, counter: uint_fast64_t, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1, secretIsBase32: Bool = true) {
+    public init?(secret: String, counter: uint_fast64_t, pinLength: Int = 6, algorithm: OTPAlgorithm = OTPAlgorithm.sha1) {
         self.counter = counter
-        super.init(secret: secret, pinLength: pinLength, algorithm: algorithm, secretIsBase32: secretIsBase32)
+        super.init(secret: secret, pinLength: pinLength, algorithm: algorithm)
     }
 
     /**
@@ -45,7 +45,7 @@ open class HOTPGenerator: OTPGenerator {
      */
     open func generateOTP() -> String? {
         self.counter += 1
-        return self.generateOTPForCounter(self.counter)
+        return self.generateOTP(counter: self.counter)
     }
 
 }
