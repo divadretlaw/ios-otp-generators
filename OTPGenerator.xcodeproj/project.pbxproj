@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		63C74AEC202A268400713DAA /* OTPGenerator_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C74AEA202A268400713DAA /* OTPGenerator_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		630DA5D320CD7919008159D3 /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0161BF62C2900A2F8CF /* Base32.swift */; };
+		630DA5D420CD791B008159D3 /* HOTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD056091BC3F82A000C5112 /* HOTPGenerator.swift */; };
+		630DA5D520CD791E008159D3 /* OTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD0560A1BC3F82A000C5112 /* OTPGenerator.swift */; };
+		630DA5D620CD791F008159D3 /* TOTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD0560B1BC3F82A000C5112 /* TOTPGenerator.swift */; };
+		63C74AEC202A268400713DAA /* OTPGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C74AEA202A268400713DAA /* OTPGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD9AD0171BF62C2900A2F8CF /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AD0161BF62C2900A2F8CF /* Base32.swift */; };
 		BDD055F31BC3F809000C5112 /* OTPGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD055F21BC3F809000C5112 /* OTPGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BDD055FA1BC3F809000C5112 /* OTPGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD055EF1BC3F809000C5112 /* OTPGenerator.framework */; };
@@ -44,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		63C74AE8202A268400713DAA /* OTPGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OTPGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		63C74AEA202A268400713DAA /* OTPGenerator_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPGenerator_macOS.h; sourceTree = "<group>"; };
+		63C74AEA202A268400713DAA /* OTPGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPGenerator.h; sourceTree = "<group>"; };
 		63C74AEB202A268400713DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD9AD0161BF62C2900A2F8CF /* Base32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
 		BDD055EF1BC3F809000C5112 /* OTPGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OTPGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +93,7 @@
 		63C74AE9202A268400713DAA /* OTPGenerator-macOS */ = {
 			isa = PBXGroup;
 			children = (
-				63C74AEA202A268400713DAA /* OTPGenerator_macOS.h */,
+				63C74AEA202A268400713DAA /* OTPGenerator.h */,
 				63C74AEB202A268400713DAA /* Info.plist */,
 			);
 			path = "OTPGenerator-macOS";
@@ -146,7 +150,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C74AEC202A268400713DAA /* OTPGenerator_macOS.h in Headers */,
+				63C74AEC202A268400713DAA /* OTPGenerator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +285,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				630DA5D620CD791F008159D3 /* TOTPGenerator.swift in Sources */,
+				630DA5D420CD791B008159D3 /* HOTPGenerator.swift in Sources */,
+				630DA5D320CD7919008159D3 /* Base32.swift in Sources */,
+				630DA5D520CD791E008159D3 /* OTPGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +345,7 @@
 				INFOPLIST_FILE = "OTPGenerator-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "at.davidwalter.framework.OTPGenerator-macOS";
 				PRODUCT_NAME = OTPGenerator;
 				SDKROOT = macosx;
@@ -368,7 +376,7 @@
 				INFOPLIST_FILE = "OTPGenerator-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "at.davidwalter.framework.OTPGenerator-macOS";
 				PRODUCT_NAME = OTPGenerator;
 				SDKROOT = macosx;
