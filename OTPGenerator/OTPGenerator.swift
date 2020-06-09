@@ -100,7 +100,7 @@ open class OTPGenerator: OTPGeneratorProtocol {
         let algorithm: CCHmacAlgorithm = self.algorithm.algorithm
 
         let hashPtr = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(self.algorithm.hashLength))
-        defer { hashPtr.deallocate(capacity: Int(self.algorithm.hashLength)) }
+        defer { hashPtr.deallocate() }
 
         self.secretKey.withUnsafeBytes { secretBytes in
             counterData.withUnsafeBytes { counterBytes in
